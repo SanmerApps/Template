@@ -112,7 +112,6 @@ androidComponents {
 }
 
 dependencies {
-    implementation(libs.accompanist.permissions)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.ui.util)
