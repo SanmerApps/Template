@@ -72,8 +72,9 @@ android {
 
     applicationVariants.configureEach {
         outputs.configureEach {
-            (this as? ApkVariantOutputImpl)?.outputFileName =
-                "App-${versionName}-${versionCode}-${name}.apk"
+            if (this is ApkVariantOutputImpl) {
+                outputFileName = "App-${versionName}-${versionCode}-${name}.apk"
+            }
         }
     }
 }
