@@ -5,8 +5,7 @@ plugins {
     alias(libs.plugins.self.compose)
     alias(libs.plugins.self.hilt)
     alias(libs.plugins.self.room)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.protobuf)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 val baseVersionName = "0.0.1"
@@ -79,22 +78,6 @@ android {
     }
 }
 
-protobuf {
-    protoc {
-        artifact = libs.protobuf.protoc.get().toString()
-    }
-
-    generateProtoTasks {
-        all().forEach { task ->
-            task.builtins {
-                register("java") {
-                    option("lite")
-                }
-            }
-        }
-    }
-}
-
 dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
@@ -110,6 +93,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.datetime)
-    implementation(libs.protobuf.kotlin.lite)
+    implementation(libs.kotlinx.serialization.protobuf)
     implementation(libs.timber)
 }
