@@ -10,11 +10,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import dev.sanmer.app.BuildConfig
 import dev.sanmer.app.R
+import kotlinx.datetime.Instant
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 @Composable
 fun MainScreen() {
@@ -32,8 +39,15 @@ fun MainScreen() {
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
+            val buildTime by remember {
+                derivedStateOf {
+                    Instant.fromEpochMilliseconds(BuildConfig.BUILD_TIME)
+                        .toLocalDateTime(TimeZone.currentSystemDefault())
+                }
+            }
+
             Text(
-                text = "Template",
+                text = "$buildTime",
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.outline.copy(0.5f)
             )
