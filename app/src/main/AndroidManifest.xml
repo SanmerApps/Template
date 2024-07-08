@@ -24,7 +24,7 @@
         tools:targetApi="35">
 
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.MainActivity"
             android:launchMode="singleTask"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">

@@ -1,4 +1,4 @@
-package dev.sanmer.app.ui.activity
+package dev.sanmer.app.ui.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
