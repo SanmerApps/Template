@@ -21,7 +21,7 @@ android {
         versionName = "${baseVersionName}${verNameSuffix}.${commitId}"
         versionCode = commitCount
 
-        resourceConfigurations += arrayOf("en", "zh-rCN")
+        resourceConfigurations += arrayOf("en")
     }
 
     val releaseSigning = if (project.hasReleaseKeyStore) {
