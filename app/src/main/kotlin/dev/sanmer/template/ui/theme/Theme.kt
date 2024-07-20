@@ -1,4 +1,4 @@
-package dev.sanmer.app.ui.theme
+package dev.sanmer.template.ui.theme
 
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -13,7 +13,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import dev.sanmer.app.compat.BuildCompat
+import dev.sanmer.template.compat.BuildCompat
 
 @Composable
 fun AppTheme(

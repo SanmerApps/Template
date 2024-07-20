@@ -15,7 +15,7 @@ gradlePlugin {
             id = "self.application"
             implementationClass = "ApplicationConventionPlugin"
         }
-        
+
         register("self.library") {
             id = "self.library"
             implementationClass = "LibraryConventionPlugin"

@@ -1,4 +1,4 @@
-package dev.sanmer.app
+package dev.sanmer.template
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

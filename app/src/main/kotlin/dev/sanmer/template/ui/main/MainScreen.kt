@@ -1,4 +1,4 @@
-package dev.sanmer.app.ui.main
+package dev.sanmer.template.ui.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,32 +17,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
-import dev.sanmer.app.BuildConfig
-import dev.sanmer.app.R
-import kotlinx.datetime.Instant
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import dev.sanmer.template.BuildConfig
+import dev.sanmer.template.R
+import dev.sanmer.template.ktx.toLocalDateTime
 
 @Composable
 fun MainScreen() {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopBar(scrollBehavior = scrollBehavior)
         }
-    ) { innerPadding ->
+    ) { contentPadding ->
         Box(
             modifier = Modifier
-                .padding(innerPadding)
+                .nestedScroll(scrollBehavior.nestedScrollConnection)
+                .padding(contentPadding)
                 .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             val buildTime by remember {
                 derivedStateOf {
-                    Instant.fromEpochMilliseconds(BuildConfig.BUILD_TIME)
-                        .toLocalDateTime(TimeZone.currentSystemDefault())
+                    BuildConfig.BUILD_TIME.toLocalDateTime()
                 }
             }
 

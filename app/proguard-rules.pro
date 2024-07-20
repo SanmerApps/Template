@@ -1,1 +1,1 @@
--repackageclasses dev.sanmer.app
+-repackageclasses dev.sanmer.template

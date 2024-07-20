@@ -1,4 +1,4 @@
-package dev.sanmer.app.ui.theme
+package dev.sanmer.template.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
