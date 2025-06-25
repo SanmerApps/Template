@@ -39,6 +39,7 @@ class ApplicationConventionPlugin : Plugin<Project> {
 
             sourceSets.all {
                 languageSettings {
+                    optIn("kotlin.time.ExperimentalTime")
                     optIn("kotlinx.serialization.ExperimentalSerializationApi")
                 }
             }
