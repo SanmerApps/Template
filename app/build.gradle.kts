@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.self.compose)
     alias(libs.plugins.self.room)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.licensee)
 }
 
 val baseVersionName = "0.0.1"
@@ -82,6 +83,11 @@ android {
     }
 }
 
+licensee {
+    bundleAndroidAsset.set(true)
+    allow("Apache-2.0")
+}
+
 dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
@@ -99,5 +105,6 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.serialization.protobuf)
 }
