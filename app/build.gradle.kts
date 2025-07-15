@@ -4,9 +4,9 @@ import java.time.Instant
 plugins {
     alias(libs.plugins.self.application)
     alias(libs.plugins.self.compose)
-    alias(libs.plugins.self.hilt)
     alias(libs.plugins.self.room)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.licensee)
 }
 
 val baseVersionName = "0.0.1"
@@ -83,6 +83,11 @@ android {
     }
 }
 
+licensee {
+    bundleAndroidAsset.set(true)
+    allow("Apache-2.0")
+}
+
 dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
@@ -91,14 +96,15 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.documentfile)
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.service)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.viewmodel.savedstate)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.koin.android)
+    implementation(libs.koin.compose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.serialization.protobuf)
-    implementation(libs.timber)
 }
