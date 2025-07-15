@@ -67,8 +67,7 @@ jobs:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
-            OUTPUT="app/build/outputs/apk/release/"
-            RELEASE_FILE=$(find $OUTPUT -name "Template-*-release.apk")
+            RELEASE_FILE=$(find app/build/outputs/apk/release -name "*-release.apk")
             ESCAPED=$(python3 -c 'import json,os; print(json.dumps(os.environ["COMMIT_MESSAGE"]))')
             curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup" \
               -F "chat_id=${CHANNEL_ID}" \
