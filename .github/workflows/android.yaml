@@ -71,6 +71,6 @@ jobs:
             ESCAPED=$(python3 -c 'import json,os; print(json.dumps(os.environ["COMMIT_MESSAGE"]))')
             curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup" \
               -F "chat_id=${CHANNEL_ID}" \
-              -F "media=[{\"type\":\"document\",\"media\":\"attach://release\",\"parse_mode\":\"MarkdownV2\",\"caption\":${ESCAPED}}]" \
+              -F "media=[{\"type\":\"document\",\"media\":\"attach://release\",\"caption\":${ESCAPED}}]" \
               -F "release=@${RELEASE_FILE}"
           fi
