@@ -27,6 +27,7 @@ android {
 
     @Suppress("UnstableApiUsage")
     androidResources {
+        generateLocaleConfig = true
         localeFilters += listOf("en")
     }
 
