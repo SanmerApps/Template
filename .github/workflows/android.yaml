@@ -69,7 +69,7 @@ jobs:
           if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
             OUTPUT="app/build/outputs/apk/release/"
             RELEASE_FILE=$(find $OUTPUT -name "Template-*-release.apk")
-            ESCAPED=`python3 -c 'import json,os,urllib.parse; print(urllib.parse.quote(json.dumps(os.environ["COMMIT_MESSAGE"])))'`
+            ESCAPED=$(python3 -c 'import json,os; print(json.dumps(os.environ["COMMIT_MESSAGE"]))')
             curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup" \
               -F "chat_id=${CHANNEL_ID}" \
               -F "media=[{\"type\":\"document\",\"media\":\"attach://release\",\"parse_mode\":\"MarkdownV2\",\"caption\":${ESCAPED}}]" \
