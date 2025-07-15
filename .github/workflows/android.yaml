@@ -58,3 +58,20 @@ jobs:
         with:
           name: ${{ steps.release-name.outputs.name }}-mapping
           path: app/build/outputs/mapping/release
+
+      - name: Post to channel
+        if: success() && github.ref == 'refs/heads/main'
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        run: |
+          if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
+            OUTPUT="app/build/outputs/apk/release/"
+            RELEASE_FILE=$(find $OUTPUT -name "Template-*-release.apk")
+            ESCAPED=`python3 -c 'import json,os,urllib.parse; print(urllib.parse.quote(json.dumps(os.environ["COMMIT_MESSAGE"])))'`
+            curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup" \
+              -F "chat_id=${CHANNEL_ID}" \
+              -F "media=[{\"type\":\"document\",\"media\":\"attach://release\",\"parse_mode\":\"MarkdownV2\",\"caption\":${ESCAPED}}]" \
+              -F "release=@${RELEASE_FILE}"
+          fi
