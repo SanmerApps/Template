@@ -83,7 +83,8 @@ android {
 }
 
 licensee {
-    bundleAndroidAsset.set(true)
+    bundleAndroidAsset = true
+    androidAssetReportPath = "artifacts.json"
     allow("Apache-2.0")
 }
 
