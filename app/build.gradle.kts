@@ -10,7 +10,7 @@ plugins {
 }
 
 val baseVersionName = "0.0.1"
-val devVersion = exec("git tag --contains HEAD").isEmpty()
+val devVersion = exec("git tag --points-at HEAD").isEmpty()
 val shaSuffix = gitCommitSha.let { ".${it.substring(0, 7)}" }
 val devSuffix = if (devVersion) ".dev" else ""
 
