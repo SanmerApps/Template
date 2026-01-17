@@ -20,7 +20,7 @@ kotlinxSerialization = "1.9.0"
 ksp = "2.3.4"
 
 [libraries]
-android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "androidGradlePlugin" }
 compose-gradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradle = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
