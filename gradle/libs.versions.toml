@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "8.13.2"
+androidGradlePlugin = "9.0.0"
 androidxActivity = "1.12.2"
 androidxAppCompat = "1.7.1"
 androidxCompose = "1.10.1"
@@ -20,7 +20,7 @@ kotlinxSerialization = "1.9.0"
 ksp = "2.3.4"
 
 [libraries]
-android-gradle = { module = "com.android.tools.build:gradle", version.ref = "androidGradlePlugin" }
+android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "androidGradlePlugin" }
 compose-gradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradle = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
