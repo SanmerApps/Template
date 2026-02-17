@@ -10,8 +10,10 @@ permissions:
   contents: write
 
 jobs:
-  dependency-submission:
+  submit:
+    name: Submit
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
