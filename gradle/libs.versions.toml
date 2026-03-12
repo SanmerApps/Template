@@ -2,7 +2,7 @@
 androidGradlePlugin = "9.1.0"
 androidxActivity = "1.12.4"
 androidxAppCompat = "1.7.1"
-androidxCompose = "1.10.4"
+androidxCompose = "1.10.5"
 androidxComposeMaterial3 = "1.4.0"
 androidxCore = "1.17.0"
 androidxCoreSplashscreen = "1.2.0"
