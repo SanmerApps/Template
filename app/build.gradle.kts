@@ -74,6 +74,12 @@ android {
     dependenciesInfo.includeInApk = false
 }
 
+androidComponents.onVariants { variant ->
+    variant.outputs.forEach {
+        it.outputFileName = "Template-${it.versionName.get()}-${it.versionCode.get()}-${variant.buildType}.apk"
+    }
+}
+
 licensee {
     bundleAndroidAsset = true
     androidAssetReportPath = "artifacts.json"
