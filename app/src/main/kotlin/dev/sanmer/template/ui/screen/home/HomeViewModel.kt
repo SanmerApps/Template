@@ -1,4 +1,4 @@
-package dev.sanmer.template.ui.main
+package dev.sanmer.template.ui.screen.home
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +12,7 @@ import dev.sanmer.template.model.ui.UiLicense
 import dev.sanmer.template.repository.LicensesRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class HomeViewModel(
     private val licensesRepository: LicensesRepository
 ) : ViewModel() {
     var data by mutableStateOf<LoadData<List<UiLicense>>>(LoadData.Loading)

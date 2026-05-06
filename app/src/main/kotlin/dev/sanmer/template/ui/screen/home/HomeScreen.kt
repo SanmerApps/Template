@@ -1,4 +1,4 @@
-package dev.sanmer.template.ui.main
+package dev.sanmer.template.ui.screen.home
 
 import android.content.Intent
 import androidx.compose.foundation.clickable
@@ -36,11 +36,10 @@ import dev.sanmer.template.ui.component.LabelText
 import dev.sanmer.template.ui.component.Loading
 import dev.sanmer.template.ui.ktx.plus
 import dev.sanmer.template.ui.ktx.surface
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MainScreen(
-    viewModel: MainViewModel = koinViewModel()
+fun HomeScreen(
+    viewModel: HomeViewModel
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
