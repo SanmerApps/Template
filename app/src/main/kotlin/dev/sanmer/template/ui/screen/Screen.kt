@@ -6,4 +6,7 @@ import kotlinx.serialization.Serializable
 sealed interface Screen : NavKey {
     @Serializable
     data object Home : Screen
+
+    @Serializable
+    data object License: Screen
 }
