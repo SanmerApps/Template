@@ -3,8 +3,9 @@ import java.time.Instant
 plugins {
     alias(libs.plugins.self.application)
     alias(libs.plugins.self.compose)
-    alias(libs.plugins.self.room)
+    alias(libs.plugins.androidx.room)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.licensee)
 }
 
@@ -79,6 +80,10 @@ androidComponents.onVariants { variant ->
     }
 }
 
+room3 {
+    schemaDirectory("$projectDir/schemas")
+}
+
 licensee {
     bundleAndroidAsset = true
     androidAssetReportPath = "artifacts.json"
@@ -99,6 +104,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.navigation3)
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
     implementation(libs.koin.compose.navigation3)

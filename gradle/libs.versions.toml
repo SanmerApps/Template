@@ -10,7 +10,7 @@ androidxDataStore = "1.2.1"
 androidxDocumentFile = "1.1.0"
 androidxLifecycle = "2.11.0"
 androidxNavigation3 = "1.1.4"
-androidxRoom = "2.8.4"
+androidxRoom = "3.0.0"
 cashLicensee = "1.14.1"
 koin = "4.2.2"
 kotlin = "2.4.10"
@@ -42,9 +42,8 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-lifecycle-viewmodel-navigation3 = { module = "androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "androidxLifecycle" }
 androidx-navigation3-runtime = { module = "androidx.navigation3:navigation3-runtime", version.ref = "androidxNavigation3" }
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "androidxNavigation3" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
+androidx-room-compiler = { module = "androidx.room3:room3-compiler", version.ref = "androidxRoom" }
+androidx-room-runtime = { module = "androidx.room3:room3-runtime", version.ref = "androidxRoom" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-compose-navigation3 = { module = "io.insert-koin:koin-compose-navigation3", version.ref = "koin" }
@@ -57,10 +56,10 @@ kotlinx-serialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-seria
 self-application = { id = "self.application", version = "unspecified" }
 self-library = { id = "self.library", version = "unspecified" }
 self-compose = { id = "self.compose", version = "unspecified" }
-self-room = { id = "self.room", version = "unspecified" }
 
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+androidx-room = { id = "androidx.room3", version.ref = "androidxRoom" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
