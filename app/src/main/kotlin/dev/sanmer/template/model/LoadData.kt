@@ -6,6 +6,7 @@ sealed class LoadData<out V> {
     data class Success<out V>(val value: V) : LoadData<V>()
     data class Failure(val error: Throwable) : LoadData<Nothing>()
 
+    val isPending inline get() = this == Pending
     val isLoading inline get() = this == Loading
     val isSuccess inline get() = this is Success
     val isFailure inline get() = this is Failure
@@ -34,8 +35,8 @@ sealed class LoadData<out V> {
             }
         }
 
-        inline fun <V, R> LoadData<V>.getValue(fallback: R, transform: (V) -> R): R {
-            return (this as? Success)?.value?.let(transform) ?: fallback
+        inline fun <V, R> LoadData<V>.getOrElse(transform: (V) -> R?, defaultValue: () -> R): R {
+            return (this as? Success)?.value?.let(transform) ?: defaultValue()
         }
     }
 }

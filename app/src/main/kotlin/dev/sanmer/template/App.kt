@@ -1,8 +1,8 @@
 package dev.sanmer.template
 
 import android.app.Application
+import dev.sanmer.template.di.Navigation
 import dev.sanmer.template.di.Repositories
-import dev.sanmer.template.ui.di.Navigation
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin

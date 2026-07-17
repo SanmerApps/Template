@@ -1,5 +1,6 @@
 package dev.sanmer.template.ui.screen.license
 
+import android.content.Context
 import android.content.Intent
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.clickable
@@ -32,7 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.sanmer.template.R
 import dev.sanmer.template.model.LoadData
-import dev.sanmer.template.model.ui.UiLicense
+import dev.sanmer.template.model.license.Artifact
 import dev.sanmer.template.ui.component.Finished
 import dev.sanmer.template.ui.component.LabelText
 import dev.sanmer.template.ui.component.Loading
@@ -42,14 +43,14 @@ import dev.sanmer.template.ui.ktx.surface
 @Composable
 fun LicenseScreen(
     viewModel: LicenseViewModel,
-    onBack: () -> Unit
+    goBack: () -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
         topBar = {
             TopBar(
-                onBack = onBack,
+                onBack = goBack,
                 scrollBehavior = scrollBehavior
             )
         }
@@ -64,7 +65,7 @@ fun LicenseScreen(
                         .fillMaxSize()
                 )
 
-                is LoadData.Success<List<UiLicense>> -> LicenseList(
+                is LoadData.Success<List<Artifact>> -> ArtifactList(
                     list = it.value,
                     contentPadding = contentPadding,
                     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
@@ -82,93 +83,76 @@ fun LicenseScreen(
 }
 
 @Composable
-private fun LicenseList(
-    list: List<UiLicense>,
+private fun ArtifactList(
+    list: List<Artifact>,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
     listState: LazyListState = rememberLazyListState()
 ) = LazyColumn(
     modifier = modifier,
     state = listState,
-    contentPadding = PaddingValues(all = 20.dp) + contentPadding,
+    contentPadding = PaddingValues(20.dp) + contentPadding,
     verticalArrangement = Arrangement.spacedBy(20.dp)
 ) {
     items(list) {
-        LicenseItem(it)
+        ArtifactItem(it)
     }
 }
 
 @Composable
-private fun LicenseItem(
-    license: UiLicense
-) {
-    val context = LocalContext.current
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .surface(
-                shape = MaterialTheme.shapes.large,
-                backgroundColor = MaterialTheme.colorScheme.surface,
-                border = CardDefaults.outlinedCardBorder(false)
-            )
-            .clickable(
-                onClick = {
-                    context.startActivity(
-                        Intent.parseUri(license.url, Intent.URI_INTENT_SCHEME)
-                    )
-                },
-                enabled = license.hasUrl
-            )
-            .padding(all = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(15.dp),
-    ) {
-        ValueText(
-            title = license.name,
-            value = license.dependency
-        )
-
-        FlowRow(
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-        ) {
-            LabelText(
-                text = license.version
-            )
-
-            license.spdxLicenses.forEach {
-                LabelText(
-                    text = it.name
-                )
-            }
-
-            license.unknownLicenses.forEach {
-                LabelText(
-                    text = it.name.ifEmpty { it.url }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun ValueText(
-    title: String,
-    value: String,
-    modifier: Modifier = Modifier
+private fun ArtifactItem(
+    artifact: Artifact,
+    context: Context = LocalContext.current
 ) = Column(
-    modifier = modifier
+    modifier = Modifier
+        .fillMaxWidth()
+        .surface(
+            shape = MaterialTheme.shapes.large,
+            backgroundColor = MaterialTheme.colorScheme.surface,
+            border = CardDefaults.outlinedCardBorder(false)
+        )
+        .clickable(
+            onClick = {
+                context.startActivity(
+                    Intent.parseUri(artifact.scm.url, Intent.URI_INTENT_SCHEME)
+                )
+            },
+            enabled = artifact.scm.url.isNotEmpty()
+        )
+        .padding(20.dp)
 ) {
     Text(
-        text = title,
+        text = artifact.name.ifEmpty { artifact.artifactId },
         style = MaterialTheme.typography.titleMedium
     )
 
     Text(
-        text = value,
+        text = "${artifact.groupId}:${artifact.artifactId}",
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.outline
     )
+
+    FlowRow(
+        modifier = Modifier.padding(top = 15.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        LabelText(
+            text = artifact.version
+        )
+
+        artifact.spdxLicenses.forEach {
+            LabelText(
+                text = it.name
+            )
+        }
+
+        artifact.unknownLicenses.forEach {
+            LabelText(
+                text = it.name.ifEmpty { it.url }
+            )
+        }
+    }
 }
 
 @Composable
