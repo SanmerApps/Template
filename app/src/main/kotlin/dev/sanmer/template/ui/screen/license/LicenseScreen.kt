@@ -32,7 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.sanmer.template.R
-import dev.sanmer.template.model.LoadData
 import dev.sanmer.template.model.license.Artifact
 import dev.sanmer.template.ui.component.Finished
 import dev.sanmer.template.ui.component.LabelText
@@ -57,22 +56,22 @@ fun LicenseScreen(
     ) { contentPadding ->
         Crossfade(
             targetState = viewModel.data
-        ) {
-            when (it) {
-                LoadData.Pending, LoadData.Loading -> Loading(
+        ) { data ->
+            data.onLoading {
+                Loading(
                     modifier = Modifier
                         .padding(contentPadding)
                         .fillMaxSize()
                 )
-
-                is LoadData.Success<List<Artifact>> -> ArtifactList(
-                    list = it.value,
+            }.onSuccess {
+                ArtifactList(
+                    list = it,
                     contentPadding = contentPadding,
                     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
                 )
-
-                is LoadData.Failure -> Finished(
-                    label = it.error.message ?: it.error.javaClass.name,
+            }.onFailure {
+                Finished(
+                    label = it.message ?: it.javaClass.name,
                     modifier = Modifier
                         .padding(contentPadding)
                         .fillMaxSize()

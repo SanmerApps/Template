@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.sanmer.template.Logger
 import dev.sanmer.template.model.LoadData
-import dev.sanmer.template.model.LoadData.Default.asLoadData
+import dev.sanmer.template.model.LoadData.Default.loadData
 import dev.sanmer.template.model.license.Artifact
 import dev.sanmer.template.repository.LicensesRepository
 import kotlinx.coroutines.launch
@@ -27,11 +27,11 @@ class LicenseViewModel(
 
     private fun loadData() {
         viewModelScope.launch {
-            data = runCatching {
+            data = loadData {
                 licensesRepository.fetch()
             }.onFailure {
                 logger.e(it)
-            }.asLoadData()
+            }
         }
     }
 }

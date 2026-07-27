@@ -11,32 +11,46 @@ sealed class LoadData<out V> {
     val isSuccess inline get() = this is Success
     val isFailure inline get() = this is Failure
 
+    fun getOrThrow(): V {
+        return when (this) {
+            Pending -> throw IllegalStateException("Pending")
+            Loading -> throw IllegalStateException("Loading")
+            is Success<V> -> value
+            is Failure -> throw error
+        }
+    }
+
+    inline fun <R> getOrElse(transform: (V) -> R?, defaultValue: () -> R): R {
+        return (this as? Success)?.value?.let(transform) ?: defaultValue()
+    }
+
+    inline fun onPending(action: () -> Unit): LoadData<V> {
+        if (this == Pending) action()
+        return this
+    }
+
+    inline fun onLoading(action: () -> Unit): LoadData<V> {
+        if (this == Loading) action()
+        return this
+    }
+
+    inline fun onSuccess(action: (V) -> Unit): LoadData<V> {
+        (this as? Success)?.value?.let(action)
+        return this
+    }
+
+    inline fun onFailure(action: (Throwable) -> Unit): LoadData<V> {
+        (this as? Failure)?.error?.let(action)
+        return this
+    }
+
     companion object Default {
-        fun <V> Result<V>.asLoadData(): LoadData<V> {
-            return when {
-                isSuccess -> Success(getOrThrow())
-                else -> Failure(requireNotNull(exceptionOrNull()))
+        inline fun <T, R> T.loadData(block: T.() -> R): LoadData<R> {
+            return try {
+                Success(block())
+            } catch (e: Throwable) {
+                Failure(e)
             }
-        }
-
-        inline fun <V, R> Result<V>.asLoadData(transform: (V) -> R): LoadData<R> {
-            return when {
-                isSuccess -> Success(transform(getOrThrow()))
-                else -> Failure(requireNotNull(exceptionOrNull()))
-            }
-        }
-
-        fun <V> LoadData<V>.getOrThrow(): V {
-            return when (this) {
-                Pending -> throw IllegalStateException("Pending")
-                Loading -> throw IllegalStateException("Loading")
-                is Success<V> -> value
-                is Failure -> throw error
-            }
-        }
-
-        inline fun <V, R> LoadData<V>.getOrElse(transform: (V) -> R?, defaultValue: () -> R): R {
-            return (this as? Success)?.value?.let(transform) ?: defaultValue()
         }
     }
 }
