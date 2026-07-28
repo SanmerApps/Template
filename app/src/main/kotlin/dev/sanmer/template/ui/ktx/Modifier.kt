@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Shape
 fun Modifier.surface(
     shape: Shape,
     backgroundColor: Color,
-    border: BorderStroke?,
+    border: BorderStroke? = null,
 ) = then(if (border != null) Modifier.border(border, shape) else Modifier)
     .background(color = backgroundColor, shape = shape)
     .clip(shape)

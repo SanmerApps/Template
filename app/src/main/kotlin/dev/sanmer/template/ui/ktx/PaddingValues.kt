@@ -1,5 +1,3 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package dev.sanmer.template.ui.ktx
 
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,10 +9,10 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 
-inline operator fun PaddingValues.plus(other: PaddingValues): PaddingValues =
+operator fun PaddingValues.plus(other: PaddingValues): PaddingValues =
     OperatorPaddingValues(this, other, Dp::plus)
 
-inline operator fun PaddingValues.minus(other: PaddingValues): PaddingValues =
+operator fun PaddingValues.minus(other: PaddingValues): PaddingValues =
     OperatorPaddingValues(this, other, Dp::minus)
 
 @Immutable
@@ -48,27 +46,27 @@ class OperatorPaddingValues(
         )
 }
 
-inline fun PaddingValues.top() = PaddingValues(top = calculateTopPadding())
+fun PaddingValues.top() = PaddingValues(top = calculateTopPadding())
 
-inline fun PaddingValues.bottom() = PaddingValues(bottom = calculateBottomPadding())
+fun PaddingValues.bottom() = PaddingValues(bottom = calculateBottomPadding())
 
-inline fun PaddingValues.vertical() = PaddingValues(
+fun PaddingValues.vertical() = PaddingValues(
     top = calculateTopPadding(),
     bottom = calculateBottomPadding()
 )
 
 @Composable
-inline fun PaddingValues.start() = with(LocalLayoutDirection.current) {
+fun PaddingValues.start() = with(LocalLayoutDirection.current) {
     PaddingValues(start = calculateStartPadding(this))
 }
 
 @Composable
-inline fun PaddingValues.end() = with(LocalLayoutDirection.current) {
+fun PaddingValues.end() = with(LocalLayoutDirection.current) {
     PaddingValues(end = calculateEndPadding(this))
 }
 
 @Composable
-inline fun PaddingValues.horizontal() = with(LocalLayoutDirection.current) {
+fun PaddingValues.horizontal() = with(LocalLayoutDirection.current) {
     PaddingValues(
         start = calculateStartPadding(this),
         end = calculateEndPadding(this)
@@ -76,7 +74,7 @@ inline fun PaddingValues.horizontal() = with(LocalLayoutDirection.current) {
 }
 
 @Composable
-inline fun PaddingValues.copy(
+fun PaddingValues.copy(
     start: Dp = calculateTopPadding(),
     top: Dp = with(LocalLayoutDirection.current) { calculateStartPadding(this) },
     end: Dp = with(LocalLayoutDirection.current) { calculateEndPadding(this) },
