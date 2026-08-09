@@ -17,5 +17,5 @@ infix fun CornerBasedShape.topWith(other: CornerBasedShape) = copy(
 )
 
 infix fun CornerBasedShape.bottomWith(other: CornerBasedShape) = copy(
-    bottomStart = other.topStart, bottomEnd = other.topEnd
+    bottomStart = other.bottomStart, bottomEnd = other.bottomEnd
 )

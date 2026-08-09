@@ -1,13 +1,10 @@
 package dev.sanmer.template.ui.ktx
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 
 operator fun PaddingValues.plus(other: PaddingValues): PaddingValues =
     OperatorPaddingValues(this, other, Dp::plus)
@@ -46,42 +43,34 @@ class OperatorPaddingValues(
         )
 }
 
-fun PaddingValues.top() = PaddingValues(top = calculateTopPadding())
+fun PaddingValues.horizontal() = HorizontalPaddingValues(this)
 
-fun PaddingValues.bottom() = PaddingValues(bottom = calculateBottomPadding())
+@Immutable
+class HorizontalPaddingValues(
+    private val padding: PaddingValues
+) : PaddingValues {
+    override fun calculateLeftPadding(layoutDirection: LayoutDirection) =
+        padding.calculateLeftPadding(layoutDirection)
 
-fun PaddingValues.vertical() = PaddingValues(
-    top = calculateTopPadding(),
-    bottom = calculateBottomPadding()
-)
+    override fun calculateTopPadding() = 0.dp
 
-@Composable
-fun PaddingValues.start() = with(LocalLayoutDirection.current) {
-    PaddingValues(start = calculateStartPadding(this))
+    override fun calculateRightPadding(layoutDirection: LayoutDirection) =
+        padding.calculateRightPadding(layoutDirection)
+
+    override fun calculateBottomPadding() = 0.dp
 }
 
-@Composable
-fun PaddingValues.end() = with(LocalLayoutDirection.current) {
-    PaddingValues(end = calculateEndPadding(this))
-}
+fun PaddingValues.vertical() = VerticalPaddingValues(this)
 
-@Composable
-fun PaddingValues.horizontal() = with(LocalLayoutDirection.current) {
-    PaddingValues(
-        start = calculateStartPadding(this),
-        end = calculateEndPadding(this)
-    )
-}
+@Immutable
+class VerticalPaddingValues(
+    private val padding: PaddingValues
+) : PaddingValues {
+    override fun calculateLeftPadding(layoutDirection: LayoutDirection) = 0.dp
 
-@Composable
-fun PaddingValues.copy(
-    start: Dp = calculateTopPadding(),
-    top: Dp = with(LocalLayoutDirection.current) { calculateStartPadding(this) },
-    end: Dp = with(LocalLayoutDirection.current) { calculateEndPadding(this) },
-    bottom: Dp = calculateBottomPadding()
-) = PaddingValues(
-    start = start,
-    top = top,
-    end = end,
-    bottom = bottom
-)
+    override fun calculateTopPadding() = padding.calculateTopPadding()
+
+    override fun calculateRightPadding(layoutDirection: LayoutDirection) = 0.dp
+
+    override fun calculateBottomPadding() = padding.calculateBottomPadding()
+}
