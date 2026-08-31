@@ -68,6 +68,7 @@ jobs:
 
       - name: Post to channel
         if: success() && github.ref == 'refs/heads/main'
+        continue-on-error: true
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
