@@ -20,4 +20,4 @@ updates:
 registries:
   maven-google:
     type: maven-repository
-    url: https://dl.google.com/dl
+    url: https://maven.google.com
