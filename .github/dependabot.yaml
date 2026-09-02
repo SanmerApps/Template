@@ -13,9 +13,9 @@ updates:
       interval: daily
       time: "22:00"
     labels: [ dependencies ]
-    registries: *
+    registries: "*"
     ignore:
-      - dependency-name: self.*
+      - dependency-name: "self.*"
 
 registries:
   maven-google:
