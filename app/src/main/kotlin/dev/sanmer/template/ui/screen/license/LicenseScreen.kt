@@ -90,8 +90,8 @@ private fun ArtifactList(
 ) = LazyColumn(
     modifier = modifier,
     state = listState,
-    contentPadding = PaddingValues(20.dp) + contentPadding,
-    verticalArrangement = Arrangement.spacedBy(20.dp)
+    contentPadding = PaddingValues(15.dp) + contentPadding,
+    verticalArrangement = Arrangement.spacedBy(15.dp)
 ) {
     items(list) {
         ArtifactItem(it)

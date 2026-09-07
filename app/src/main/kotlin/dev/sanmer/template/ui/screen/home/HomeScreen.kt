@@ -26,7 +26,7 @@ import dev.sanmer.template.ui.screen.Screen
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel,
-    goTo: (Screen) -> Unit,
+    goTo: (Screen) -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
