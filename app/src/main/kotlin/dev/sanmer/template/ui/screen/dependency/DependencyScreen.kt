@@ -1,4 +1,4 @@
-package dev.sanmer.template.ui.screen.license
+package dev.sanmer.template.ui.screen.dependency
 
 import android.content.Context
 import android.content.Intent
@@ -32,7 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import dev.sanmer.template.R
-import dev.sanmer.template.model.license.Artifact
+import dev.sanmer.template.model.dependency.Dependency
 import dev.sanmer.template.ui.component.Finished
 import dev.sanmer.template.ui.component.LabelText
 import dev.sanmer.template.ui.component.Loading
@@ -40,8 +40,8 @@ import dev.sanmer.template.ui.ktx.plus
 import dev.sanmer.template.ui.ktx.surface
 
 @Composable
-fun LicenseScreen(
-    viewModel: LicenseViewModel,
+fun DependencyScreen(
+    viewModel: DependencyViewModel,
     goBack: () -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -64,7 +64,7 @@ fun LicenseScreen(
                         .fillMaxSize()
                 )
             }.onSuccess {
-                ArtifactList(
+                DependencyList(
                     list = it,
                     contentPadding = contentPadding,
                     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
@@ -82,8 +82,8 @@ fun LicenseScreen(
 }
 
 @Composable
-private fun ArtifactList(
-    list: List<Artifact>,
+private fun DependencyList(
+    list: List<Dependency>,
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
     listState: LazyListState = rememberLazyListState()
@@ -94,13 +94,13 @@ private fun ArtifactList(
     verticalArrangement = Arrangement.spacedBy(15.dp)
 ) {
     items(list) {
-        ArtifactItem(it)
+        DependencyItem(it)
     }
 }
 
 @Composable
-private fun ArtifactItem(
-    artifact: Artifact,
+private fun DependencyItem(
+    dependency: Dependency,
     context: Context = LocalContext.current
 ) = Column(
     modifier = Modifier
@@ -113,20 +113,20 @@ private fun ArtifactItem(
         .clickable(
             onClick = {
                 context.startActivity(
-                    Intent.parseUri(artifact.scm.url, Intent.URI_INTENT_SCHEME)
+                    Intent.parseUri(dependency.scm.url, Intent.URI_INTENT_SCHEME)
                 )
             },
-            enabled = artifact.scm.url.isNotEmpty()
+            enabled = dependency.scm.url.isNotEmpty()
         )
         .padding(20.dp)
 ) {
     Text(
-        text = artifact.name.ifEmpty { artifact.artifactId },
+        text = dependency.name.ifEmpty { dependency.artifactId },
         style = MaterialTheme.typography.titleMedium
     )
 
     Text(
-        text = "${artifact.groupId}:${artifact.artifactId}",
+        text = "${dependency.groupId}:${dependency.artifactId}",
         style = MaterialTheme.typography.bodyMedium,
         color = MaterialTheme.colorScheme.outline
     )
@@ -137,16 +137,16 @@ private fun ArtifactItem(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         LabelText(
-            text = artifact.version
+            text = dependency.version
         )
 
-        artifact.spdxLicenses.forEach {
+        dependency.spdxLicenses.forEach {
             LabelText(
                 text = it.name
             )
         }
 
-        artifact.unknownLicenses.forEach {
+        dependency.unknownLicenses.forEach {
             LabelText(
                 text = it.name.ifEmpty { it.url }
             )
@@ -159,7 +159,7 @@ private fun TopBar(
     onBack: () -> Unit,
     scrollBehavior: TopAppBarScrollBehavior
 ) = TopAppBar(
-    title = { Text(text = stringResource(R.string.licenses_title)) },
+    title = { Text(text = stringResource(R.string.dependency_title)) },
     navigationIcon = {
         IconButton(
             onClick = onBack

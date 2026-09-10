@@ -1,9 +1,9 @@
-package dev.sanmer.template.model.license
+package dev.sanmer.template.model.dependency
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Artifact(
+data class Dependency(
     val groupId: String,
     val artifactId: String,
     val version: String,

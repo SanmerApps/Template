@@ -2,10 +2,10 @@ package dev.sanmer.template.di
 
 import androidx.navigation3.runtime.NavBackStack
 import dev.sanmer.template.ui.screen.Screen
+import dev.sanmer.template.ui.screen.dependency.DependencyScreen
+import dev.sanmer.template.ui.screen.dependency.DependencyViewModel
 import dev.sanmer.template.ui.screen.home.HomeScreen
 import dev.sanmer.template.ui.screen.home.HomeViewModel
-import dev.sanmer.template.ui.screen.license.LicenseScreen
-import dev.sanmer.template.ui.screen.license.LicenseViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.scope.dsl.activityRetainedScope
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -16,7 +16,7 @@ import org.koin.dsl.navigation3.navigation
 @OptIn(KoinExperimentalAPI::class)
 val Navigation = module {
     viewModelOf(::HomeViewModel)
-    viewModelOf(::LicenseViewModel)
+    viewModelOf(::DependencyViewModel)
 
     activityRetainedScope {
         scoped { NavBackStack(Screen.Home) }
@@ -29,9 +29,9 @@ val Navigation = module {
             )
         }
 
-        navigation<Screen.License> {
+        navigation<Screen.Dependency> {
             val backStack = get<NavBackStack<Screen>>()
-            LicenseScreen(
+            DependencyScreen(
                 viewModel = koinViewModel(),
                 goBack = backStack::removeLastOrNull
             )

@@ -1,4 +1,4 @@
-package dev.sanmer.template.ui.screen.license
+package dev.sanmer.template.ui.screen.dependency
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,17 +8,17 @@ import androidx.lifecycle.viewModelScope
 import dev.sanmer.template.Logger
 import dev.sanmer.template.model.LoadData
 import dev.sanmer.template.model.LoadData.Default.loadData
-import dev.sanmer.template.model.license.Artifact
-import dev.sanmer.template.repository.LicensesRepository
+import dev.sanmer.template.model.dependency.Dependency
+import dev.sanmer.template.repository.AssetsRepository
 import kotlinx.coroutines.launch
 
-class LicenseViewModel(
-    private val licensesRepository: LicensesRepository
+class DependencyViewModel(
+    private val assetsRepository: AssetsRepository
 ) : ViewModel() {
-    var data by mutableStateOf<LoadData<List<Artifact>>>(LoadData.Loading)
+    var data by mutableStateOf<LoadData<List<Dependency>>>(LoadData.Loading)
         private set
 
-    private val logger = Logger.Android("LicenseViewModel")
+    private val logger = Logger.Android("DependencyViewModel")
 
     init {
         logger.d("init")
@@ -28,7 +28,7 @@ class LicenseViewModel(
     private fun loadData() {
         viewModelScope.launch {
             data = loadData {
-                licensesRepository.fetch()
+                assetsRepository.getDependencies()
             }.onFailure {
                 logger.e(it)
             }

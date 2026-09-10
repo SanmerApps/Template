@@ -8,5 +8,5 @@ sealed interface Screen : NavKey {
     data object Home : Screen
 
     @Serializable
-    data object License: Screen
+    data object Dependency : Screen
 }

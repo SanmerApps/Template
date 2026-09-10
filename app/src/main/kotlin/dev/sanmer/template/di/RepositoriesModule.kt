@@ -1,11 +1,11 @@
 package dev.sanmer.template.di
 
-import dev.sanmer.template.repository.LicensesRepository
-import dev.sanmer.template.repository.LicensesRepositoryImpl
+import dev.sanmer.template.repository.AssetsRepository
+import dev.sanmer.template.repository.AssetsRepositoryImpl
 import org.koin.dsl.module
 
 val Repositories = module {
-    single<LicensesRepository> {
-        LicensesRepositoryImpl(get())
+    single<AssetsRepository> {
+        AssetsRepositoryImpl(get())
     }
 }

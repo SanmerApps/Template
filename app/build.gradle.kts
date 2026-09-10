@@ -91,7 +91,7 @@ room3 {
 
 licensee {
     bundleAndroidAsset = true
-    androidAssetReportPath = "artifacts.json"
+    androidAssetReportPath = "dependencies.json"
     allow("Apache-2.0")
 }
 

@@ -45,9 +45,9 @@ fun HomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(
-                onClick = { goTo(Screen.License) }
+                onClick = { goTo(Screen.Dependency) }
             ) {
-                Text(text = stringResource(R.string.licenses_title))
+                Text(text = stringResource(R.string.dependency_title))
             }
         }
     }
