@@ -1,19 +1,19 @@
 package dev.sanmer.template
 
 import android.app.Application
-import dev.sanmer.template.di.Navigation
-import dev.sanmer.template.di.Repositories
+import dev.sanmer.template.di.AppModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext.startKoin
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidLogger()
+            androidLogger(if (BuildConfig.DEBUG) Level.DEBUG else Level.INFO)
             androidContext(this@App)
-            modules(Repositories, Navigation)
+            modules(AppModule)
         }
     }
 }
