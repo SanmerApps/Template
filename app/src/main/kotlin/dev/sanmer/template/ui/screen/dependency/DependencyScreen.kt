@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.plus
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
@@ -36,7 +37,6 @@ import dev.sanmer.template.model.dependency.Dependency
 import dev.sanmer.template.ui.component.Finished
 import dev.sanmer.template.ui.component.LabelText
 import dev.sanmer.template.ui.component.Loading
-import dev.sanmer.template.ui.ktx.plus
 import dev.sanmer.template.ui.ktx.surface
 
 @Composable
