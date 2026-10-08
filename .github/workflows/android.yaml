@@ -17,8 +17,6 @@ jobs:
         with:
           distribution: 'jetbrains'
           java-version: 21
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
@@ -64,10 +62,10 @@ jobs:
         continue-on-error: true
         run: |
           if [ ! -z "${{ secrets.BOT_TOKEN }}" ]; then
-            RELEASE_FILE=$(find app/build/outputs/apk/release -name "*.apk")
+            RELEASE=$(find app/build/outputs/apk/release -name "*.apk")
             ESCAPED=$(python3 -c 'import json,os; print(json.dumps("${{ github.event.head_commit.message }}"))')
-            curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup" \
+            curl -v "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMediaGroup" \
               -F "chat_id=${{ secrets.CHANNEL_ID }}" \
               -F "media=[{\"type\":\"document\",\"media\":\"attach://release\",\"caption\":${ESCAPED}}]" \
-              -F "release=@${RELEASE_FILE}"
+              -F "release=@${RELEASE}"
           fi
