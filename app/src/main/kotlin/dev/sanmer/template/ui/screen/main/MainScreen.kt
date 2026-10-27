@@ -1,6 +1,5 @@
 package dev.sanmer.template.ui.screen.main
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.core.tween
@@ -41,7 +40,6 @@ fun MainScreen(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun MainContent(
     backStack: NavBackStack<Screen>,
