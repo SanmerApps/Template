@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.licensee)
 }
 
-val baseVersionName = "0.0.1"
+val baseVersionName = libs.versions.versionName.get()
 val gitCommitTag = gitCommitTag()
 val gitCommitSha = gitCommitSha()
 val gitCommitNum = gitCommitNum()
