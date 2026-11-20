@@ -45,10 +45,7 @@ class ApplicationConventionPlugin : Plugin<Project> {
         extensions.configure<KotlinAndroidProjectExtension> {
             compilerOptions {
                 languageVersion.set(kotlinVersion)
-                optIn.addAll(
-                    "kotlin.time.ExperimentalTime",
-                    "kotlinx.serialization.ExperimentalSerializationApi"
-                )
+                optIn.add("kotlinx.serialization.ExperimentalSerializationApi")
             }
         }
     }
