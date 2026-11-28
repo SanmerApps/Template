@@ -3,7 +3,8 @@ package dev.sanmer.template.ui.component
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ContainedLoadingIndicator
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun Loading(
     modifier: Modifier = Modifier
@@ -24,9 +26,8 @@ fun Loading(
     modifier = modifier,
     contentAlignment = Alignment.Center
 ) {
-    CircularProgressIndicator(
-        modifier = Modifier.size(48.dp),
-        strokeWidth = 4.dp
+    ContainedLoadingIndicator(
+        modifier = Modifier.size(48.dp)
     )
 }
 

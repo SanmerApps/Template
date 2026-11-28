@@ -27,7 +27,6 @@ ksp = "2.3.14"
 
 [libraries]
 android-gradle = { module = "com.android.tools.build:gradle-api", version.ref = "androidGradlePlugin" }
-compose-gradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
@@ -64,7 +63,6 @@ kotlinx-serialization-protobuf = { module = "org.jetbrains.kotlinx:kotlinx-seria
 [plugins]
 self-application = { id = "self.application" }
 self-library = { id = "self.library" }
-self-compose = { id = "self.compose" }
 
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }

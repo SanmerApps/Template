@@ -36,7 +36,6 @@ import dev.sanmer.template.R
 import dev.sanmer.template.model.dependency.Dependency
 import dev.sanmer.template.ui.component.Finished
 import dev.sanmer.template.ui.component.LabelText
-import dev.sanmer.template.ui.component.Loading
 import dev.sanmer.template.ui.ktx.surface
 
 @Composable
@@ -57,13 +56,7 @@ fun DependencyScreen(
         Crossfade(
             targetState = viewModel.data
         ) { data ->
-            data.onLoading {
-                Loading(
-                    modifier = Modifier
-                        .padding(contentPadding)
-                        .fillMaxSize()
-                )
-            }.onSuccess {
+            data.onSuccess {
                 DependencyList(
                     list = it,
                     contentPadding = contentPadding,
